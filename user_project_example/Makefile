@@ -1,9 +1,13 @@
-TOP = $(TOP)
+TOP = user_project_example
 TAG = $(TOP)_tag
 PROJECT_DIR = ../
 LIBRELANE_DIR ?= $(PROJECT_DIR)/librelane
+PDK_ROOT = $(PROJECT_DIR)/IHP-Open-PDK
 
 CONFIG_FILE = $(PROJECT_DIR)/$(TOP)/config.json
+
+.PHONY: all
+all: librelane klayout-drc view_results
 
 librelane: final/gds/$(TOP).gds
 .PHONY: librelane
@@ -15,6 +19,11 @@ final/gds/$(TOP).gds:
 	# copy final results to top directory
 	rm -rf $(PROJECT_DIR)/$(TOP)/final
 	cp -r $(PROJECT_DIR)/$(TOP)/runs/$(TAG)/final $(PROJECT_DIR)/$(TOP)
+
+.PHONY: klayout-drc
+klayout-drc:
+	# Run KLayout DRC on the generated GDS
+	python3 $(PDK_ROOT)/$(PDK)/libs.tech/klayout/tech/drc/run_drc.py --path $(PROJECT_DIR)/$(TOP)/final/gds/$(TOP).gds --run_mode=deep --disable_extra_rules --no_density --run_dir $(PROJECT_DIR)/$(TOP)/final/klayout_drc/klayout_drc_report.log
 
 view_results:
 	# View the results in KLayout
