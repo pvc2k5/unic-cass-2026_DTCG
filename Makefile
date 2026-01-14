@@ -13,8 +13,4 @@ librelane: final/gds/$(TOP).gds
 
 final/gds/$(TOP).gds: $(CFG_FILES)
 	# Run librelane to generate the layout
-	nix-shell --pure $(LIBRELANE_DIR) --run "PDK_ROOT=$(PDK_ROOT) PDK=$(PDK) librelane --run-tag $(TAG) --overwrite --manual-pdk $(CONFIG_FILE)"
-
-	# copy final results to top directory
-	rm -rf $(PROJECT_DIR)/final
-	cp -r $(PROJECT_DIR)/runs/$(TAG)/final $(PROJECT_DIR)
+	$(MAKE) -C user_project_example
