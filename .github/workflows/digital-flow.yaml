@@ -5,6 +5,8 @@ on: [push, workflow_dispatch]
 jobs:
   librelane:
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/hm-aemy/librelane-base-image:latest
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
