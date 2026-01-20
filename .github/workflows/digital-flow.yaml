@@ -1,0 +1,31 @@
+name: Librelane Digital Flow (UNIC-CASS)
+
+on: [push, workflow_dispatch]
+
+jobs:
+  librelane:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/hm-aemy/librelane-base-image:latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        fetch-depth: 0
+
+    - name: physical implementation
+      shell: bash
+      run: |
+        source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+        git config --global --add safe.directory "$(pwd)"
+        make librelane
+
+    - name: Upload LibreLane artifacts
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: librelane-${{ github.sha }}
+        path: |
+          final/**
+        if-no-files-found: warn
