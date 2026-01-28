@@ -38,11 +38,11 @@ Quick Start
     - Follow [this link](https://github.com/unic-cass/unic-cass-wrapper/fork) to create your repository.
     - Clone the repository using:
         ```
-        git clone <your GitHub repo URL>
+        git clone https://github.com/pvc2k5/unic-cass-2026_DTCG.git
         ```
 2. Set up your local environment:
     ```
-    cd <project_name>
+    cd unic-cass-2026-DTCG
     make setup
     ```
     This command installs:
@@ -66,8 +66,8 @@ Quick Start
     - Build your design GDSII.
 
         ```
-        cd unic_cass_wrapper_user_project/your_design/
-        make <module_name>
+        cd unic_cass_wrapper_user_project/
+        make Clock_Generator
         ```
     - Finally, you can explore the results:
         ```
