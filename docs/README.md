@@ -97,13 +97,13 @@ Quick Start
     2. If it passes DRC and LVS it is ready for tapeout.
 6. This main Makefile will be run in github every time you push a change. The action must pass in order to complete the mock-tapeout process.
 
-GPIO Configuration
+Layout of the design without pad ring
 =================
 
-![architecture](img/unic-cass-mock-tapeout-pinlist.png)
+![architecture](img/core_gds_img.png)
 
-Layout Integration
+Layout of the design with pad ring
 =================
 
-![architecture](img/unic-cass-mock-tapeout.png)
+![architecture](img/padring_gds_img.png)
 
