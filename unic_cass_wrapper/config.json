@@ -21,7 +21,6 @@
     "VERILOG_FILES": [
         "dir::./src/user_project_wrapper.sv"
     ],
-
     "FP_SIZING": "absolute",
     "DIE_AREA": [0, 0, 2000, 2000],
     "CORE_AREA": [358.00, 358.00, 1642, 1642],
@@ -36,11 +35,11 @@
 
     "PDN_VPITCH": 50,  
     "PDN_HPITCH": 50,
-
     "PDN_VWIDTH": 3.5,
     "PDN_HWIDTH": 3.5,
 
     "USE_SLANG": true,
+    "SYNTH_HIERARCHY_MODE":"keep",
 
     "EXTRA_GDS": "dir::bondpad/bondpad_70x70.gds",
     "EXTRA_LEFS":"dir::bondpad/bondpad_70x70.lef",
@@ -123,20 +122,20 @@
     ],
 
     "MACROS": {
-            "user_project_example": {
-                "gds": "dir::../unic_cass_wrapper_user_project/user_project_example/final/gds/user_project_example.gds",
-                "lef": "dir::../unic_cass_wrapper_user_project/user_project_example/final/lef/user_project_example.lef",
-                "nl": "dir::../unic_cass_wrapper_user_project/user_project_example/final/pnl/user_project_example.pnl.v",
+            "user_project": {
+                "gds": "dir::../unic_cass_wrapper_user_project/Clock_Generator/runs/user_project_run/final/gds/user_project.gds",
+                "lef": "dir::../unic_cass_wrapper_user_project/Clock_Generator/runs/user_project_run/final/lef/user_project.lef",
+                "nl": "dir::../unic_cass_wrapper_user_project/Clock_Generator/runs/user_project_run/final/pnl/user_project.pnl.v",
                 "lib": {
-                    "nom_typ_1p20V_25C": "dir::../unic_cass_wrapper_user_project/user_project_example/final/lib/nom_typ_1p20V_25C/user_project_example__nom_typ_1p20V_25C.lib",
-                    "nom_fast_1p32V_m40C": "dir::../unic_cass_wrapper_user_project/user_project_example/final/lib/nom_fast_1p32V_m40C/user_project_example__nom_fast_1p32V_m40C.lib",
-                    "nom_slow_1p08V_125C": "dir::../unic_cass_wrapper_user_project/user_project_example/final/lib/nom_slow_1p08V_125C/user_project_example__nom_slow_1p08V_125C.lib"
+                    "nom_typ_1p20V_25C": "dir::../unic_cass_wrapper_user_project/Clock_Generator/final/lib/nom_typ_1p20V_25C/user_project__nom_typ_1p20V_25C.lib",
+                    "nom_fast_1p32V_m40C": "dir::../unic_cass_wrapper_user_project/Clock_Generator/final/lib/nom_fast_1p32V_m40C/user_project__nom_fast_1p32V_m40C.lib",
+                    "nom_slow_1p08V_125C": "dir::../unic_cass_wrapper_user_project/Clock_Generator/final/lib/nom_typ_1p20V_25C/user_project__nom_typ_1p20V_25C.lib"
                 },
                 "spef": {
-                    "nom_typ_1p20V_25C": "dir::../unic_cass_wrapper_user_project/user_project_example/final/spef/nom/user_project_example.nom.spef"
+                    "nom_typ_1p20V_25C": "dir::../unic_cass_wrapper_user_project/Clock_Generator/runs/user_project_run/final/spef/nom/user_project.nom.spef"
                 },
                 "instances": {
-                    "user_project_example_inst": {
+                    "user_project_inst": {
                         "location": [530, 530],
                         "orientation": "N"
                     }

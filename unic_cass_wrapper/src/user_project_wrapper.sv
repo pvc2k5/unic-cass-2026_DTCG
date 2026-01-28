@@ -80,7 +80,7 @@ module user_project_wrapper (
     end
     endgenerate
 
-    user_project_example user_project_example_inst (
+    user_project user_project_inst (
         `ifdef USE_POWER_PINS
         .VPWR   (VDD),
         .VGND   (VSS),
@@ -92,5 +92,4 @@ module user_project_wrapper (
     );
 
 endmodule
-
 

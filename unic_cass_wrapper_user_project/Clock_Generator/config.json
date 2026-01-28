@@ -7,8 +7,8 @@
             "Magic.DRC": null
         }
     },
-    "DESIGN_NAME": "digital_pll",
-    "VERILOG_FILES": "dir::src/*.v",
+    "DESIGN_NAME": "user_project",
+    "VERILOG_FILES": "dir::src/*.sv",
     "CLOCK_PERIOD": 10,
     "CLOCK_PORT": "clk_i"
 }
