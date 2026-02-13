@@ -1,0 +1,16 @@
+{
+    "meta": {
+        "version": 3,
+        "flow": "Classic",
+        "substituting_steps":{
+            "KLayout.DRC": null,
+            "Magic.DRC": null
+        }
+    },
+    "DESIGN_NAME": "digital_pll_controller",
+    "VERILOG_FILES": "dir::src/*.sv",
+    "PNR_SDC_FILE": "dir::constraint.sdc",
+    "CLOCK_PERIOD": 10,
+    "CLOCK_PORT": "clock",
+    "CLOCK_NET": "clknet_0_clock"
+}

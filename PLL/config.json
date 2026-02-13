@@ -1,0 +1,15 @@
+{
+    "meta": {
+        "version": 3,
+        "flow": "Classic",
+        "substituting_steps":{
+            "KLayout.DRC": null,
+            "Magic.DRC": null
+        }
+    },
+    "DESIGN_NAME": "user_project",
+    "VERILOG_FILES": "dir::src/*.sv",
+    "CLOCK_PERIOD": 6.666,
+    "CLOCK_NET": "pll_inst/pll_inst.pll_control.clock",
+    "PNR_SDC_FILE": "dir::constraint.sdc"
+}

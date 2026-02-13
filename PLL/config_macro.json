@@ -1,0 +1,152 @@
+{
+
+    "meta": {
+
+        "version": 3,
+
+        "flow": "Classic",
+
+        "substituting_steps": {
+
+            "KLayout.DRC": null,
+
+            "Magic.DRC": null
+
+        }
+
+    },
+
+    "DESIGN_NAME": "user_project",
+	
+    "FP_SIZING": "absolute",
+    "DIE_AREA": [0, 0, 650, 650],
+    "CORE_AREA": [10, 10,640,640],
+
+    "VERILOG_FILES": [
+        "dir::src/digital_pll_controller.sv",
+        "dir::src/ring_osc2x13.sv",
+        "dir::src/spi_digital_pll_wrapper.sv",
+        "dir::src/user_project.sv"
+
+    ],
+
+    "PNR_SDC_FILE": "dir::constraint.sdc",
+
+    "SIGNOFF_SDC_FILE": "dir::constraint.sdc",
+
+    "FALLBACK_SDC": "dir::constraint.sdc",
+
+    "MACROS": {
+
+        "digital_pll_controller": {
+
+            "gds": [
+
+                "dir::/controller/final/gds/digital_pll_controller.gds"
+
+            ],
+
+            "lef": [
+
+                "dir::/controller/final/lef/digital_pll_controller.lef"
+
+            ],
+
+            "nl": [
+
+                "dir::/controller/final/pnl/digital_pll_controller.pnl.v"
+
+            ],
+
+            "lib": {
+
+                "nom_typ_1p20V_25C": [
+
+                    "dir::/controller/final/lib/nom_typ_1p20V_25C/digital_pll_controller__nom_typ_1p20V_25C.lib"
+
+                ],
+
+                "nom_fast_1p32V_m40C": [
+
+                    "dir::/controller/final/lib/nom_fast_1p32V_m40C/digital_pll_controller__nom_fast_1p32V_m40C.lib"
+
+                ],
+
+                "nom_slow_1p08V_125C": [
+
+                    "dir::/controller/final/lib/nom_slow_1p08V_125C/digital_pll_controller__nom_slow_1p08V_125C.lib"
+
+                ]
+
+            },
+
+            "spef": {
+
+                "nom_typ_1p20V_25C": [
+
+                    "dir::/controller/final/spef/nom/digital_pll_controller.nom.spef"
+
+                ]
+
+            }
+
+        },
+
+        "ring_osc2x13": {
+
+            "gds": [
+
+                "dir::/ring/final/gds/ring_osc2x13.gds"
+
+            ],
+
+            "lef": [
+
+                "dir::/ring/final/lef/ring_osc2x13.lef"
+
+            ],
+
+            "nl": [
+
+                "dir::/ring/final/pnl/ring_osc2x13.pnl.v"
+
+            ],
+
+            "lib": {
+
+                "nom_typ_1p20V_25C": [
+
+                    "dir::/ring/final/lib/nom_typ_1p20V_25C/ring_osc2x13__nom_typ_1p20V_25C.lib"
+
+                ],
+
+                "nom_fast_1p32V_m40C": [
+
+                    "dir::/ring/final/lib/nom_fast_1p32V_m40C/ring_osc2x13__nom_fast_1p32V_m40C.lib"
+
+                ],
+
+                "nom_slow_1p08V_125C": [
+
+                    "dir::/ring/final/lib/nom_slow_1p08V_125C/ring_osc2x13__nom_slow_1p08V_125C.lib"
+
+                ]
+
+            },
+
+            "spef": {
+
+                "nom_typ_1p20V_25C": [
+
+                    "dir::/ring/final/spef/nom/ring_osc2x13.nom.spef"
+
+                ]
+
+            }
+
+        }
+
+    },
+
+    "MACRO_PLACEMENT_CFG": "dir::/PLL/place.cfg"
+}

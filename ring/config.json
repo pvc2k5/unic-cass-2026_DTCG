@@ -1,0 +1,12 @@
+{
+    "meta": {
+        "version": 3,
+        "flow": "Classic",
+        "substituting_steps":{
+            "KLayout.DRC": null,
+            "Magic.DRC": null
+        }
+    },
+    "DESIGN_NAME": "ring_osc2x13",
+    "VERILOG_FILES": "dir::src/*.sv"
+}
