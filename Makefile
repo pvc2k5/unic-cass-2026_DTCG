@@ -1,6 +1,6 @@
 designs = $(shell find * -maxdepth 0 -type d)
 TAG ?= user_project_run
-PROJECT_DIR = $(pwd)
+PROJECT_DIR = $(PWD)
 current_design = null
 intances= PLL
 top_module = user_project
