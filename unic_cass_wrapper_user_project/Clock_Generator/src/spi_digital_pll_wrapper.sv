@@ -14,7 +14,8 @@
 //
 // Address 0x01: External Trim [31:0] 
 //   - [25:0]: ext_trim[25:0]
-//   - [31:26]: reserved
+//   - [26]: enable 
+//   - [31:27]: reserved
 
 module spi_digital_pll_wrapper(
 `ifdef USE_POWER_PINS
@@ -63,38 +64,42 @@ module spi_digital_pll_wrapper(
    
     reg          spi_miso_reg;
     assign spi_miso = spi_miso_reg;
-    (* keep_hierarchy *)    
-    digital_pll pll_inst (
-`ifdef USE_POWER_PINS
-        .VPWR(VPWR),
-        .VGND(VGND),
-`endif
-        .resetb(resetb),
-        .enable(enable_reg),
-        .osc(osc),
-        .clockp(clockp),       
-	.div(div_reg),
-        .dco(dco_reg),
-        .ext_trim(ext_trim_reg)
+    wire [7:0] next_addr;
+    assign next_addr = {addr_reg[6:0], spi_mosi};
+
+    wire [25:0] itrim;
+    wire [25:0] otrim;
+    wire        creset;
+    wire        ireset;
+
+    assign ireset = ~resetb | ~enable_reg;
+
+    assign itrim  = (dco_reg == 1'b0) ? otrim : ext_trim_reg;
+    assign creset = (dco_reg == 1'b0) ? ireset : 1'b1;
+
+    (* keep *)
+    ring_osc2x13 ringosc (
+    `ifdef USE_POWER_PINS
+        .VPWR   (VPWR),
+        .VGND   (VGND),
+    `endif
+        .reset  (ireset),
+        .trim   (itrim),
+        .clockp (clockp)
     );
 
-    // Initialize registers
-    initial begin
-        enable_reg = 1'b0;
-        dco_reg = 1'b0;
-        div_reg = 5'd8;
-	ext_trim_reg = 26'd0;
-        bit_counter = 6'd0;
-        addr_reg = 8'd0;
-        data_reg = 32'd0;
-        shift_reg = 32'd0;
-        rw_bit = 1'b0;
-        addr_phase = 1'b0;
-        data_phase = 1'b0;
-        write_complete = 1'b0;
-        spi_miso_reg = 1'b0;
-    end
-
+    digital_pll_controller pll_control (
+    `ifdef USE_POWER_PINS
+        .VPWR   (VPWR),
+        .VGND   (VGND),
+    `endif
+        .reset  (creset),
+        .clock  (clockp[0]),
+        .osc    (osc),
+        .div    (div_reg),
+        .trim   (otrim)
+    );
+    
     // SPI State Machine
     always @(posedge spi_sck or posedge spi_cs_n) begin
         if (spi_cs_n) begin
@@ -104,6 +109,7 @@ module spi_digital_pll_wrapper(
             data_phase <= 1'b0;
             shift_reg <= 32'd0;
             write_complete <= 1'b0;
+	    addr_reg <= 8'd0;
         end else begin
             // Shift in data on SCK rising edge
             if (addr_phase) begin
@@ -112,8 +118,8 @@ module spi_digital_pll_wrapper(
                     addr_reg <= {addr_reg[6:0], spi_mosi};
                     bit_counter <= bit_counter + 1'b1;
                 end else begin
-                    addr_reg <= {addr_reg[6:0], spi_mosi};
-                    rw_bit <= addr_reg[7];  // MSB is R/W bit
+		    addr_reg <= next_addr;
+                    rw_bit <= next_addr[7];  // MSB is R/W bit
                     addr_phase <= 1'b0;
                     data_phase <= 1'b1;
                     bit_counter <= 6'd0;
@@ -171,7 +177,7 @@ module spi_digital_pll_wrapper(
         if (!resetb) begin
             enable_reg <= 1'b0;
             dco_reg <= 1'b0;
-            div_reg <= 5'd8;
+            div_reg <= 5'd5;
             ext_trim_reg <= 26'd0;
         end else if (write_complete && !rw_bit) begin
             // Write operation completed
@@ -183,6 +189,7 @@ module spi_digital_pll_wrapper(
                 end
                 7'h01: begin
                     ext_trim_reg <= data_reg[25:0];
+		    enable_reg <= data_reg[26];
                 end
             endcase
         end

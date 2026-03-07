@@ -13,7 +13,7 @@
 // limitations under the License.
 // SPDX-License-Identifier: Apache-2.0
 `default_nettype none
-
+(*keep*)
 module delay_stage(
 	`ifdef USE_POWER_PINS
         input VPWR,
@@ -77,6 +77,7 @@ module delay_stage(
 
 endmodule
 
+(*keep*)
 module start_stage(
 	`ifdef USE_POWER_PINS
         inout VPWR,
@@ -154,7 +155,7 @@ module start_stage(
     );
 
 endmodule
-
+(*keep*)
 module ring_osc2x13(
 	`ifdef USE_POWER_PINS
         inout VPWR,
@@ -229,7 +230,6 @@ module ring_osc2x13(
         end
     endgenerate
 
-    (* keep_hierarchy *)
     start_stage iss (
 	`ifdef USE_POWER_PINS
         .VPWR   (VPWR),

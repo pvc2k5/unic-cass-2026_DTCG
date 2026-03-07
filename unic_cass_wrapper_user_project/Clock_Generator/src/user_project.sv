@@ -26,6 +26,7 @@ module user_project(
     assign uo_CORE2PAD[2:1] = w_clockp;
     
     assign uo_CORE2PAD[16:3] = 14'h3FFF;
+
     (* keep_hierarchy *)
     spi_digital_pll_wrapper pll_inst (
         `ifdef USE_POWER_PINS
