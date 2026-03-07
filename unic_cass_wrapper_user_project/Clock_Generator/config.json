@@ -9,6 +9,12 @@
     },
     "DESIGN_NAME": "user_project",
     "VERILOG_FILES": "dir::src/*.sv",
-    "CLOCK_PERIOD": 10,
-    "CLOCK_PORT": "clk_i"
+    "CLOCK_PORT": "osc",
+    "CLOCK_NET": "pll_inst.ringosc.ibufp01.Y",
+    "CLOCK_PERIOD": 6.666,
+    "PNR_SDC_FILE": "dir::constraint.sdc",
+
+    "SIGNOFF_SDC_FILE": "dir::constraint.sdc",
+
+    "FALLBACK_SDC": "dir::constraint.sdc"
 }

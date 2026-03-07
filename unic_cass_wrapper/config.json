@@ -4,6 +4,11 @@
         "flow": "Chip",
         "substituting_steps": {
             "Magic.DRC": null,
+
+	    "OpenROAD.CheckMacroInstances": null,
+	    "KLayout.DRC": null,
+	    "OpenROAD.IRDropReport": null,
+
             "KLayout.Antenna": null,
             "Checker.KLayoutAntenna": null,
             "KLayout.Filler": null,
@@ -32,22 +37,23 @@
 
     "PDN_CORE_RING_VWIDTH": 15,
     "PDN_CORE_RING_HWIDTH": 15,
-
+    "ERROR_ON_PDN_VIOLATIONS": false,
     "PDN_VPITCH": 50,  
     "PDN_HPITCH": 50,
     "PDN_VWIDTH": 3.5,
     "PDN_HWIDTH": 3.5,
-
+    "PDN_VOFFSET": 33.3,
+    "PDN_HOFFSET": 33.3,
     "USE_SLANG": true,
     "SYNTH_HIERARCHY_MODE":"keep",
-
     "EXTRA_GDS": "dir::bondpad/bondpad_70x70.gds",
-    "EXTRA_LEFS":"dir::bondpad/bondpad_70x70.lef",
-
+    "EXTRA_LEFS":[
+	    "dir::bondpad/bondpad_70x70.lef",
+	    "dir::../unic_cass_wrapper_user_project/PLL/runs/user_project_run/final/lef/user_project.lef"
+	],
     "PNR_SDC_FILE": "dir::constraint.sdc",
     "SIGNOFF_SDC_FILE": "dir::constraint.sdc",
     "FALLBACK_SDC": "dir::constraint.sdc",
-
     "PAD_WEST": [
         "sg13g2_IOPadVdd_west",
         "sg13g2_IOPadVss_west",
@@ -112,9 +118,6 @@
         "sg13g2_IOPadIOVss_north"
     ],
 
-    "VDD_NETS": ["VDD"],
-    "GND_NETS": ["VSS"],
-
     "GRT_ALLOW_CONGESTION": true,
 
     "IGNORE_DISCONNECTED_MODULES": [
@@ -123,16 +126,16 @@
 
     "MACROS": {
             "user_project": {
-                "gds": "dir::../unic_cass_wrapper_user_project/Clock_Generator/runs/user_project_run/final/gds/user_project.gds",
-                "lef": "dir::../unic_cass_wrapper_user_project/Clock_Generator/runs/user_project_run/final/lef/user_project.lef",
-                "nl": "dir::../unic_cass_wrapper_user_project/Clock_Generator/runs/user_project_run/final/pnl/user_project.pnl.v",
+                "gds": "dir::../unic_cass_wrapper_user_project/PLL/runs/user_project_run/final/gds/user_project.gds",
+                "lef": "dir::../unic_cass_wrapper_user_project/PLL/runs/user_project_run/final/lef/user_project.lef",
+                "nl": "dir::../unic_cass_wrapper_user_project/PLL/runs/user_project_run/final/pnl/user_project.pnl.v",
                 "lib": {
-                    "nom_typ_1p20V_25C": "dir::../unic_cass_wrapper_user_project/Clock_Generator/final/lib/nom_typ_1p20V_25C/user_project__nom_typ_1p20V_25C.lib",
-                    "nom_fast_1p32V_m40C": "dir::../unic_cass_wrapper_user_project/Clock_Generator/final/lib/nom_fast_1p32V_m40C/user_project__nom_fast_1p32V_m40C.lib",
-                    "nom_slow_1p08V_125C": "dir::../unic_cass_wrapper_user_project/Clock_Generator/final/lib/nom_typ_1p20V_25C/user_project__nom_typ_1p20V_25C.lib"
+                    "nom_typ_1p20V_25C": "dir::../unic_cass_wrapper_user_project/PLL/final/lib/nom_typ_1p20V_25C/user_project__nom_typ_1p20V_25C.lib",
+                    "nom_fast_1p32V_m40C": "dir::../unic_cass_wrapper_user_project/PLL/final/lib/nom_fast_1p32V_m40C/user_project__nom_fast_1p32V_m40C.lib",
+                    "nom_slow_1p08V_125C": "dir::../unic_cass_wrapper_user_project/PLL/final/lib/nom_typ_1p20V_25C/user_project__nom_typ_1p20V_25C.lib"
                 },
                 "spef": {
-                    "nom_typ_1p20V_25C": "dir::../unic_cass_wrapper_user_project/Clock_Generator/runs/user_project_run/final/spef/nom/user_project.nom.spef"
+                    "nom_typ_1p20V_25C": "dir::../unic_cass_wrapper_user_project/PLL/runs/user_project_run/final/spef/nom/user_project.nom.spef"
                 },
                 "instances": {
                     "user_project_inst": {

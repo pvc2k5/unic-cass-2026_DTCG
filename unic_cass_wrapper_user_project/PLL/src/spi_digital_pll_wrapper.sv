@@ -77,7 +77,7 @@ module spi_digital_pll_wrapper(
     assign itrim  = (dco_reg == 1'b0) ? otrim : ext_trim_reg;
     assign creset = (dco_reg == 1'b0) ? ireset : 1'b1;
 
-    (* keep *)
+    (* blackbox *)
     ring_osc2x13 ringosc (
     `ifdef USE_POWER_PINS
         .VPWR   (VPWR),
@@ -88,6 +88,7 @@ module spi_digital_pll_wrapper(
         .clockp (clockp)
     );
 
+    (* blackbox *)
     digital_pll_controller pll_control (
     `ifdef USE_POWER_PINS
         .VPWR   (VPWR),
