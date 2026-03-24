@@ -90,7 +90,7 @@ module start_stage(
 
     wire d0, d1, d2, ctrl0b, one;
     wire trim1b;
-    
+    wire temp,temp0; 
     wire reset_b, ctrl0_inv, trim0_b;
 
     sg13g2_inv_1 trim1bar (
@@ -101,6 +101,15 @@ module start_stage(
     sg13g2_inv_1 inv_rst ( .A(reset), .Y(reset_b) );
     sg13g2_inv_1 inv_ctl ( .A(ctrl0b), .Y(ctrl0_inv) );
     sg13g2_inv_1 inv_tr0 ( .A(trim[0]), .Y(trim0_b) );
+
+    sg13g2_buf_8 dummy1 (
+        .A(trim0_b),
+        .X(temp0)
+    );
+    sg13g2_buf_16 dummy2 (
+        .A(temp0),
+        .X(temp)
+    );
 
     sg13g2_buf_1 delaybuf0 (
         .A(in),
@@ -127,17 +136,18 @@ module start_stage(
        
     sg13g2_einvn_2 delayen0 (
         .A(d2),
-        .TE_B(trim0_b),
+        .TE_B(temp),
         .Z(out)
     );
-
     
     sg13g2_einvn_8 delayenb0 (
         .A(in),
         .TE_B(ctrl0_inv),
         .Z(out)
     );
-
+    sg13g2_sighold holder(
+	    .SH(out)
+    );
     sg13g2_einvn_2 reseten0 (
         .A(one),
         .TE_B(reset_b),
@@ -155,7 +165,6 @@ module start_stage(
     );
 
 endmodule
-(*keep*)
 module ring_osc2x13(
 	`ifdef USE_POWER_PINS
         inout VPWR,
